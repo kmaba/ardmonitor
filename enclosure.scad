@@ -1,20 +1,18 @@
-// Arduino HomeMonitor Enclosure v5 (Optimized Sleek Desktop Edition)
-// - Dimensions: 115mm (L) x 60mm (W) x 68mm (H) [Flat, compact & material-optimized]
-// - Wall thickness: 2.0mm (saves ~25% filament while remaining rigid)
-// - Modern rounded outer vertical corners (r = 4mm)
-// - Front: Vertically & horizontally centered LCD window + 5mm (0.5cm) top pin-clearance notch
-// - Left: Single clean raised USB cutout for the vertical Mega
-// - Bottom: Lightweight rear rail guide for vertical Mega board
+// Arduino HomeMonitor Enclosure v6 (Optimized Sleek Desktop Edition)
+// - Dimensions: 115mm (L) x 60mm (W) x 68mm (H)
+// - Wall thickness: 2.0mm, rounded vertical corners (r = 4mm)
+// - Front: Centered LCD window + 5mm (0.5cm) pin-clearance notch DIRECTLY above the LCD window top edge
+// - Left: Single USB cutout centered at Z = 40mm (4.0cm above base, bottom of hole at 3.4cm)
 
 $fn = 60;
 
 /* ===== ENCLOSURE DIMENSIONS ===== */
 outer_x = 115.0;
-outer_y = 60.0;                 // Slim & flat 60mm depth
-outer_z = 68.0;                 // 68mm compact height (clears 53.4mm Mega vertical)
-wall    = 2.0;                  // Optimized 2.0mm wall thickness
-corner_r = 4.0;                 // Rounded corners for modern aesthetic
-tol     = 0.35;                 // Print tolerance
+outer_y = 60.0;                 // Slim 60mm depth
+outer_z = 68.0;                 // 68mm compact height
+wall    = 2.0;                  // 2.0mm wall thickness
+corner_r = 4.0;                 // Rounded corners (r = 4mm)
+tol     = 0.35;                 // 3D print tolerance
 BOX_H   = 64.0;                 // Bottom shell height (Lid = 4.0mm)
 
 /* ===== HELPER: ROUNDED RECTANGLE CUBE ===== */
@@ -70,18 +68,18 @@ BUTTON_X = 104.0;
 BUTTON_Z = LCD_Z + LCD_H / 2;         // Aligned with LCD center
 BUTTON_D = 7.2;
 
-// Pin header notch: 48mm wide, exactly 5mm (0.5cm) down from top rim
+// Pin header notch: 48mm wide, exactly 5mm (0.5cm) directly above top edge of LCD
 NOTCH_W = 48.0;
-NOTCH_DEPTH = 5.0;                   // 5mm notch as requested
+NOTCH_H = 5.0;                       // 5mm (0.5cm) height directly above screen cutout
 
 module front_cutouts() {
-    // 1. LCD window
+    // 1. Main LCD glass window
     translate([LCD_X, -1, LCD_Z])
         cube([LCD_W + tol, wall + 2, LCD_H + tol]);
 
-    // 2. 5mm (0.5cm) pin-header notch at top rim
-    translate([LCD_X, -1, BOX_H - NOTCH_DEPTH])
-        cube([NOTCH_W + tol, wall + 2, NOTCH_DEPTH + 2]);
+    // 2. 5mm (0.5cm) pin-header notch directly above the LCD window's top edge
+    translate([LCD_X - 1, -1, LCD_Z + LCD_H])
+        cube([NOTCH_W + tol, wall + 2, NOTCH_H + tol]);
 
     // 3. Panel button hole
     translate([BUTTON_X, wall + 2, BUTTON_Z])
@@ -90,7 +88,10 @@ module front_cutouts() {
 }
 
 /* ===== LEFT WALL CUTOUTS (X = 0) ===== */
-// Single USB port aligned with vertical Mega in the rear
+// USB cutout:
+// Center: Z = 40.0mm (4.0cm), Y = 44.0mm (4.4cm)
+// Bottom edge of hole: Z = 34.0mm (3.4cm from outer base)
+// Top edge of hole: Z = 46.0mm (4.6cm from outer base)
 USB_Y = 44.0;
 USB_Z = 40.0;
 USB_W = 14.0;
@@ -103,7 +104,7 @@ module left_cutouts() {
 
 /* ===== LIGHTWEIGHT MEGA GUIDE RAIL ===== */
 module board_guide() {
-    // Slim 1.5mm vertical guide rails on the floor
+    // Slim vertical guide rails on the floor
     translate([wall + 6, outer_y - wall - 7, wall])
         difference() {
             cube([outer_x - 2*wall - 12, 5.0, 4.0]);
