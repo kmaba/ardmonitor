@@ -57,8 +57,15 @@ arduino-builder -fqbn arduino:avr:uno HomeMonitor.ino
 ### 2. Standalone Companion App
 Cross-platform lightweight driver for Windows, Linux, and macOS. Auto-detects the Arduino on any USB/COM port, sets the Arduino to Mini Mode, and streams local clock, weather, and prayer times:
 
-- **Windows**: Double-click `companion.bat` (auto-checks Python & installs `pyserial`).
-- **Linux / macOS**: Run `./companion.sh` or `python3 companion.py`.
+- **Windows (`companion.bat`)**:
+  - Fully automated 1-click bootstrap.
+  - Automatically downloads `companion.py` from GitHub if missing.
+  - Prompts for UAC and installs Python 3 if not present on the system.
+  - Auto-installs `pyserial` and connects to the display.
+- **Linux / macOS (`companion.sh`)**:
+  - Automatically downloads `companion.py` if missing.
+  - Auto-installs Python 3 via system package manager (apt/pacman/dnf/brew) if needed.
+  - Auto-installs `pyserial` and runs the driver.
 - **Manual**:
   ```sh
   pip install pyserial
