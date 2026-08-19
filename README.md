@@ -54,12 +54,16 @@ arduino-builder -fqbn arduino:avr:mega:cpu=atmega2560 HomeMonitor.ino
 arduino-builder -fqbn arduino:avr:uno HomeMonitor.ino
 ```
 
-### 2. Standalone Companion App (`companion.py`)
-Cross-platform lightweight driver for Windows, Linux, and macOS. Auto-detects the Arduino on any USB/COM port and streams local clock, weather, and prayer times:
-```sh
-pip install pyserial
-python companion.py
-```
+### 2. Standalone Companion App
+Cross-platform lightweight driver for Windows, Linux, and macOS. Auto-detects the Arduino on any USB/COM port, sets the Arduino to Mini Mode, and streams local clock, weather, and prayer times:
+
+- **Windows**: Double-click `companion.bat` (auto-checks Python & installs `pyserial`).
+- **Linux / macOS**: Run `./companion.sh` or `python3 companion.py`.
+- **Manual**:
+  ```sh
+  pip install pyserial
+  python companion.py
+  ```
 
 ### 3. Full Home Server Bridge (`homemonitor_bridge.py`)
 Runs as a systemd service on a home server or PC connected to the Arduino. Polls Pi-hole v6 API, Moonraker Klipper API, weather, and azaan, and serves a mobile-responsive web controller at `http://localhost:8080`.
