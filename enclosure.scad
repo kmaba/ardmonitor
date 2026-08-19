@@ -1,8 +1,8 @@
-// Arduino HomeMonitor Enclosure v6 (Optimized Sleek Desktop Edition)
+// Arduino HomeMonitor Enclosure v7 (Optimized Sleek Desktop Edition)
 // - Dimensions: 115mm (L) x 60mm (W) x 68mm (H)
 // - Wall thickness: 2.0mm, rounded vertical corners (r = 4mm)
-// - Front: Centered LCD window + 5mm (0.5cm) pin-clearance notch DIRECTLY above the LCD window top edge
-// - Left: Single USB cutout centered at Z = 40mm (4.0cm above base, bottom of hole at 3.4cm)
+// - Front: Centered LCD window + 5mm (0.5cm) pin-clearance notch directly above LCD window
+// - Left: Single USB cutout raised +3mm (Center Z = 43mm / 4.3cm) with halved width (Width Y = 7.0mm)
 
 $fn = 60;
 
@@ -89,12 +89,14 @@ module front_cutouts() {
 
 /* ===== LEFT WALL CUTOUTS (X = 0) ===== */
 // USB cutout:
-// Center: Z = 40.0mm (4.0cm), Y = 44.0mm (4.4cm)
-// Bottom edge of hole: Z = 34.0mm (3.4cm from outer base)
-// Top edge of hole: Z = 46.0mm (4.6cm from outer base)
+// Center: Z = 43.0mm (4.3cm), Y = 44.0mm (4.4cm)
+// Width: 7.0mm (halved from 14mm)
+// Height: 12.0mm
+// Bottom edge of hole: Z = 37.0mm (3.7cm from outer base)
+// Top edge of hole: Z = 49.0mm (4.9cm from outer base)
 USB_Y = 44.0;
-USB_Z = 40.0;
-USB_W = 14.0;
+USB_Z = 43.0;                        // Moved +0.3cm (3.0mm) up
+USB_W = 7.0;                         // Halved width (7.0mm)
 USB_H = 12.0;
 
 module left_cutouts() {
