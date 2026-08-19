@@ -777,8 +777,8 @@ void setup() {
   lcd.backlight();
   lcd.clear();
   createBarChars();
-  lcdLine(0, "kmaba.link/d");
-  lcdLine(1, "get script");
+  lcdLine(0, "kmaba/ardmonitor");
+  lcdLine(1, "github.com");
   beepSelect();
 
   Serial.begin(115200);
